@@ -28,7 +28,11 @@ console.log("Array bombs: ", bombsNumber);
 // Numeri random array bombe
 while (bombsNumber.length < 16) {
     const numberRandom = Math.floor(Math.random() * (101 - 1) + 1);
-    bombsNumber.push(numberRandom)
+    console.log(numberRandom)
+    if (bombsNumber.includes(numberRandom)) {
+    } else {
+        bombsNumber.push(numberRandom);
+    }
 }
 console.log(bombsNumber);
 
@@ -36,10 +40,14 @@ console.log(bombsNumber);
 const userNumbers = [];
 
 // Numeri utente 
-while (userNumbers.length < 5 || use) {
+while (userNumbers.length < 5) {
     const chosenNumber = prompt("Dimmi un numero da 1 a 100");
     console.log("Numero scelto dall'utente: ", chosenNumber);
-    userNumbers.push(chosenNumber)
+    if (userNumbers.includes(chosenNumber)) {
+        alert("Numero già inserito! scegli un altro numero da 1 a 100");
+    } else {
+        userNumbers.push(chosenNumber);
+    }
 }
 console.log(userNumbers);
 
