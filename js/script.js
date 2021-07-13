@@ -33,7 +33,17 @@ while (bombsNumber.length < 16) {
 console.log(bombsNumber);
 
 // Array numeri utente 
-const userNumber = [];
+const userNumbers = [];
+
+// Numeri utente 
+while (userNumbers.length < 5 || use) {
+    const chosenNumber = prompt("Dimmi un numero da 1 a 100");
+    console.log("Numero scelto dall'utente: ", chosenNumber);
+    userNumbers.push(chosenNumber)
+}
+console.log(userNumbers);
+
+
 
 
 
