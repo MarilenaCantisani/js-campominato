@@ -29,8 +29,7 @@ console.log("Array bombs: ", bombsNumber);
 while (bombsNumber.length < 16) {
     const numberRandom = Math.floor(Math.random() * (101 - 1) + 1);
     console.log(numberRandom);
-    if (bombsNumber.includes(numberRandom)) {
-    } else {
+    if (!bombsNumber.includes(numberRandom)) {
         bombsNumber.push(numberRandom);
     }
 }
@@ -40,32 +39,38 @@ console.log(bombsNumber);
 const userNumbers = [];
 
 // Numeri utente 
-while (userNumbers.length < 4) {
+var gameOver = false;
+var score = 0;
+while (userNumbers.length < 4 && !gameOver) {
 
-    const chosenNumber = prompt("Dimmi un numero da 1 a 100");
+    const chosenNumber = parseInt(prompt("Dimmi un numero da 1 a 100"));
     console.log("Numero scelto dall'utente: ", chosenNumber);
 
-    if (userNumbers.includes(chosenNumber) || isInArray(chosenNumber, bombsNumber)) {
+    if (userNumbers.includes(chosenNumber)) {
         alert("Numero già inserito! scegli un altro numero da 1 a 100");
     } else {
         userNumbers.push(chosenNumber);
     }
 
+    if (isInArray(chosenNumber, bombsNumber)) {
+        alert("Game over!");
+        gameOver = true;
+    } else {
+        score++;
+    }
 }
 console.log(userNumbers);
 
 
-function isInArray(chosenNumber, bombsNumber) {
+function isInArray(myelement, myarray) {
     let result = false;
     var i = 0;
-    while (i < bombsNumber.length && result === false) {
-        if (chosenNumber === bombsNumber[i]) {
+    while (i < myarray.length && !result) {
+        if (myelement === myarray[i]) {
             result = true;
         }
         i++;
     }
     return result;
-    console.log(result);
-
 }
 
