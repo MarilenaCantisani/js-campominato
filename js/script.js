@@ -41,7 +41,7 @@ const userNumbers = [];
 // Numeri utente 
 var gameOver = false;
 var score = 0;
-while (userNumbers.length < 4 && !gameOver) {
+while (userNumbers.length < (100 - bombsNumber.length) && !gameOver) {
 
     const chosenNumber = parseInt(prompt("Dimmi un numero da 1 a 100"));
     console.log("Numero scelto dall'utente: ", chosenNumber);
@@ -59,7 +59,9 @@ while (userNumbers.length < 4 && !gameOver) {
         score++;
     }
 }
-console.log(userNumbers);
+
+console.log("Numeri utente: ", userNumbers);
+console.log("Punteggio: ", score);
 
 
 function isInArray(myelement, myarray) {
@@ -73,4 +75,6 @@ function isInArray(myelement, myarray) {
     }
     return result;
 }
+
+
 
