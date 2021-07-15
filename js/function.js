@@ -7,7 +7,7 @@ function getRandomNumber(min, max) {
 function isInArray(needle, haystack) {
     var found = false;
     var i = 0;
-    while (i < haystack && !found) {
+    while (i < haystack.length && !found) {
         if (needle === haystack[i]) {
             found = true;
         }

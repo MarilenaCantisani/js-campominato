@@ -1,25 +1,26 @@
-/* Il computer deve generare 16 numeri casuali tra 1 e 100, queste saranno le nostre bombe.
-I numeri delle bombe non possono essere duplicati (i 16 numeri devono essere tutti diversi)
-Il giocatore, deve cercare di non prendere le bombe.
-Gli chiederemo 100 - 16 volte di scegliere un numero, uno alla volta, sempre compreso tra 1 e 100.
-L'utente non può inserire 2 volte lo stesso numero
-Ogni  volta che l'utente sceglie un numero che non è presente tra le bombe,
-guadagna un punto e poi gli chiediamo un altro numero.
-Se il numero scelto dall'utente è presente tra i numeri bomba, la partita termina.
-Quando la partita termina, comunichiamo all'utente il suo punteggio. */
 
-
-var totalNumber = 100;
+var totalNumber;
 var totalBombs = 16;
-var userChance = totalNumber - totalBombs;
 var bombsNumber = [];
 var userNumbers = [];
 var gameOver = false;
-var score = userNumbers.length;
+var difficultyLevel = ["facile", "normale", "difficile"];
 
 
+var difficultyChosen = prompt("Scegli il livello di difficoltà: 'facile', 'normale', 'difficile'");
 
-// RandomNumber -> bombs array
+switch (difficultyChosen.toLocaleLowerCase().trim()) {
+    case "facile":
+        totalNumber = 100;
+        break;
+    case "difficile":
+        totalNumber = 50;
+        break;
+    default:
+        totalNumber = 80;
+}
+var userChance = totalNumber - totalBombs;
+
 while (bombsNumber.length < totalBombs) {
     var randomNumber = getRandomNumber(1, 100);
     console.log("Numero random: ", randomNumber)
@@ -29,8 +30,8 @@ while (bombsNumber.length < totalBombs) {
 }
 console.log("Array bombe: ", bombsNumber);
 
-while (!gameOver && userNumbers.length < 5) {
-    var chosenNumber = getUserNumber(1, 100);
+while (!gameOver && userNumbers.length < userChance) {
+    var chosenNumber = getUserNumber(1, totalNumber);
     if (isInArray(chosenNumber, bombsNumber)) {
         gameOver = true;
     } else {
@@ -40,15 +41,17 @@ while (!gameOver && userNumbers.length < 5) {
             userNumbers.push(chosenNumber);
         }
     }
-
 }
 console.log("Numeri utente :", userNumbers);
 
+var score = userNumbers.length;
 if (gameOver) {
     alert("Hai perso! Punteggio raggiunto: " + score);
 } else {
     alert("Hai vinto! Punteggio raggiunto:" + score);
 }
+
+
 
 
 
