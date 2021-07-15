@@ -8,73 +8,50 @@ guadagna un punto e poi gli chiediamo un altro numero.
 Se il numero scelto dall'utente è presente tra i numeri bomba, la partita termina.
 Quando la partita termina, comunichiamo all'utente il suo punteggio. */
 
-//? #1: Creare un array per contenere le nostre bombe;
-//? #2: Generare numeri random da inserire nell'array di bombe finchè non arrivo a 16 numeri; 
-//? #3: Creare un array che conterrà i numeri scelti dall'utente;
 
-//? #4: Chiedere al giocatore un numero; 
-//? #5: Controllo se è un numero già presente nell'array dei numeri scelti --> se è già presente continuo a chiedere;
-//? #5: Controllo se il numero scelto è all'interno dell'array di bombe --> se è presente la partita termina;
-//? #6: Se il numero non è presente in entrambi gli array lo sggiungo all'array di numeri scelti dall'utente
+var totalNumber = 100;
+var totalBombs = 16;
+var userChance = totalNumber - totalBombs;
+var bombsNumber = [];
+var userNumbers = [];
+var userLost = false;
+var score = userNumbers.length;
 
-//? #7: Stampare il messaggio "Game over";
-//? #8: Comunicare all'utente il punteggio raggiunto; 
-//? #9: Ricominciare il gioco. 
 
-// Array bombe
-const bombsNumber = [];
-console.log("Array bombs: ", bombsNumber);
 
-// Numeri random array bombe
-while (bombsNumber.length < 16) {
-    const numberRandom = Math.floor(Math.random() * (101 - 1) + 1);
-    console.log(numberRandom);
-    if (!bombsNumber.includes(numberRandom)) {
+// RandomNumber -> bombs array
+while (bombsNumber.length < totalBombs) {
+    var randomNumber = getRandomNumber(1, 100);
+    console.log("Numero random: ", randomNumber)
+    if (!isInArray(randomNumber, bombsNumber)) {
         bombsNumber.push(numberRandom);
     }
 }
-console.log(bombsNumber);
+console.log("Array bombe: ", bombsNumber);
 
-// Array numeri utente 
-const userNumbers = [];
-
-// Numeri utente 
-var gameOver = false;
-var score = 0;
-while (userNumbers.length < (100 - bombsNumber.length) && !gameOver) {
-
-    const chosenNumber = parseInt(prompt("Dimmi un numero da 1 a 100"));
-    console.log("Numero scelto dall'utente: ", chosenNumber);
-
-    if (userNumbers.includes(chosenNumber)) {
-        alert("Numero già inserito! scegli un altro numero da 1 a 100");
-    } else {
-        userNumbers.push(chosenNumber);
-    }
-
+while (!userLost && userNumbers.length < 5) {
+    var chosenNumber = getUserNumber(1, 100);
     if (isInArray(chosenNumber, bombsNumber)) {
-        alert("Game over!");
-        gameOver = true;
+        userLost = true;
     } else {
-        score++;
-    }
-}
-
-console.log("Numeri utente: ", userNumbers);
-console.log("Punteggio: ", score);
-
-
-function isInArray(myelement, myarray) {
-    let result = false;
-    var i = 0;
-    while (i < myarray.length && !result) {
-        if (myelement === myarray[i]) {
-            result = true;
+        if (isInArray(chosenNumber, userNumbers)) {
+            alert("Numero già inserito, scegli un altro numero!");
+        } else {
+            userNumbers.push(chosenNumber);
         }
-        i++;
     }
-    return result;
+
 }
+console.log("Numeri utente :", userNumbers);
+
+if (userLost) {
+    alert("Hai perso! Punteggio raggiunto: " + score);
+} else {
+    alert("Hai vinto! Punteggio raggiunto:" + score);
+}
+
+
+
 
 
 
