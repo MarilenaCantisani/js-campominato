@@ -14,7 +14,7 @@ var totalBombs = 16;
 var userChance = totalNumber - totalBombs;
 var bombsNumber = [];
 var userNumbers = [];
-var userLost = false;
+var gameOver = false;
 var score = userNumbers.length;
 
 
@@ -29,10 +29,10 @@ while (bombsNumber.length < totalBombs) {
 }
 console.log("Array bombe: ", bombsNumber);
 
-while (!userLost && userNumbers.length < 5) {
+while (!gameOver && userNumbers.length < 5) {
     var chosenNumber = getUserNumber(1, 100);
     if (isInArray(chosenNumber, bombsNumber)) {
-        userLost = true;
+        gameOver = true;
     } else {
         if (isInArray(chosenNumber, userNumbers)) {
             alert("Numero già inserito, scegli un altro numero!");
@@ -44,7 +44,7 @@ while (!userLost && userNumbers.length < 5) {
 }
 console.log("Numeri utente :", userNumbers);
 
-if (userLost) {
+if (gameOver) {
     alert("Hai perso! Punteggio raggiunto: " + score);
 } else {
     alert("Hai vinto! Punteggio raggiunto:" + score);
